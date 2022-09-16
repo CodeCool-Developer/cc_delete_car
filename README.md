@@ -1,6 +1,8 @@
 # CC Delete Car (FiveM) 
 Script ลบรถอัตโนมัติ สามารถยกเลิกการนับเวลาถอยหลังได้ มี UI แจ้งเตือน
 
+<img src="https://cdn.discordapp.com/attachments/999480649717125170/1020465398459670628/Screenshot_2022-09-16_235314.png"/>
+
 ### Reference UI: [Dv_Hunter_delcars]
 
 ## ดาวน์โหลด
