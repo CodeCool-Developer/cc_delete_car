@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300;400&display=swap');
+* {
+    color: white;
+    font-family: 'Mitr', sans-serif;
+}
+
+.container {
+    position: absolute;
+    right: 6%;
+    top: 9.5%;
+    transform: translateY(-50%);
+    background-color: rgba(18, 20, 23, 0.6);
+    box-shadow: 0 0 10px rgb(39,149,255);
+    border-left: 0.4vh solid #73C2FB;
+    border-right: 0.4vh solid #73C2FB;
+    height: 12vh;
+    border-radius: 1vh;
+    width: 37vh;
+    display: none;
+    z-index: 50;
+    overflow: hidden;
+}
+
+#box-content {
+    position: absolute;
+    width: 35vh;
+    height: 10vh;
+    left: 1vh;
+    top: 1vh;
+    border-radius: 0.5vh;
+    background-color: rgba(18, 20, 23, 0.4);
+}
+
+#titleText {
+    position: absolute;
+    width: 20vh;
+    height: 2vh;
+    top: 1vh;
+    left: 1vh;
+    line-height: 2vh;
+    color: #73C2FB;
+    font-size: 2vh;
+    text-align: left;
+}
+
+#time-content {
+    position: absolute;
+    width: 33vh;
+    height: 3vh;
+    left: 1vh;
+    bottom: 0.5vh;
+    border-radius: 0.4vh;
+    background: rgb(18, 20, 23,0.4);
+}
+
+#Time {
+    width: 100%;
+    height: 100%;
+    font-size: 2vh;
+    /*line-height: 4vh;*/
+    text-align: center;
+    color: white;
+    font-weight: 500;
+}
+
+#txtMin {
+    color: #ffbd03;
+    font-weight: 600;
+}
+
+#txtSec {
+    color: #ffbd03;
+    font-weight: 600;
+}
+
+#subText {
+    position: absolute;
+    width: 25vh;
+    height: 2vh;
+    line-height: 2vh;
+    color: white;
+    top: 4vh;
+    left: 1vh;
+    font-size: 1.5vh;
+    text-align: left;
+    font-weight: 300;
+}
+
+#logo-content {
+    position: absolute;
+    width: 5vh;
+    height: 5vh;
+    right: 1vh;
+    top: 1vh;
+    border-radius: 0.5vh;
+    background: rgba(0,0,0,0.3);
+}
+
+#logo {
+    position: absolute;
+    width: 4vh;
+    height: 4vh;
+    top: 0.5vh;
+    left: 0.5vh;
+    background-image: url(https://cdn.discordapp.com/attachments/1010911970066698280/1010912674839797800/Logo_128.png);
+    background-size: cover;
+    animation: 3s ease 0s infinite normal none running LogoRotate;
+}
+
+@keyframes LogoRotate {
+    0% { transform: rotate(-360deg); }
+    50% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
