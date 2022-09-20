@@ -4,7 +4,7 @@
 --- ██║       ██║          ██║  ██║ ██╔══╝  ╚██╗██╔╝ ██╔══╝  ██║    ██║  ██║ ██╔═══╝  ██╔══╝  ██╔══██╗   ╚═╝ --
 --- ╚═██████╗ ╚═██████╗    ██████╔╝ ██████╗  ╚███╔╝  ██████╗ ██████╗╚█████╔╝ ██║      ██████╗ ██║  ██║   ██╗ --
 ---   ╚═════╝   ╚═════╝    ╚═════╝  ╚═════╝   ╚══╝   ╚═════╝ ╚═════╝ ╚════╝  ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝ --
---- Project : cc_delete_vehicle
+--- Project : cc_delete_car
 --- Auth : CodeCool Developer
 --- Website : https://fivem.codecool.xyz
 --- Discord : https://discord.gg/K7PDe2jfpW
@@ -32,27 +32,17 @@ Config.Timer = {
 }
 
 Config.DeleteAllVehicle = {
-    Commands = {
-        'delallcar',
-        'dvall'
+    command = 'delallcar',
+    group = {
+        ['superadmin'] = true,
+        ['admin'] = true,
     },
-    Group = 'superadmin',
-    AllowConsole = true,
-    HelpMessage = 'คำสั่ง ลบรถทุกคันที่ไม่มีคนขับ',
-    arguments = {
-        {
-            name = 'minute',
-            help = 'กรุณาใส่นาทีนับถอยหลังลบรถ',
-            type = 'number' }
-    }
 }
 
-Config.CanCelDelete = {
-    Commands = {
-        'ccdelallcar',
-        'ccdvall'
+Config.CanCelDeleteAllVehicle = {
+    command = 'ccdelallcar',
+    group = {
+        ['superadmin'] = true,
+        ['admin'] = true,
     },
-    AllowConsole = true,
-    Group = 'superadmin',
-    HelpMessage = 'คำสั่ง ยกเลิกคำสั่งการลบรถ',
 }

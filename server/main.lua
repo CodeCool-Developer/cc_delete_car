@@ -9,27 +9,26 @@ end)
 ------------------------------------------------
 --- Register Commands เริ่มนับเวลาถอยหลังลบรถอัตโนมัติ ---
 ------------------------------------------------
-ESX.RegisterCommand(Config.DeleteAllVehicle.Commands, Config.DeleteAllVehicle.Group, function(xPlayer, args, showError)
-    local minute = args.minute
-    TriggerClientEvent(script_name .. ":deleteCar", -1, minute)
-    checkTimeLoad(minute, 'delallcar')
-end, true, {
-    help = Config.DeleteAllVehicle.HelpMessage,
-    validate = Config.DeleteAllVehicle.allowConsole,
-    arguments = Config.DeleteAllVehicle.arguments
-})
+RegisterCommand(Config.DeleteAllVehicle.command, function(source, args, user)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    if Config.DeleteAllVehicle.group[xPlayer.getGroup()] then
+        local minute = args[1]
+        TriggerClientEvent(script_name .. ":deleteCar", -1, minute)
+        checkTimeLoad(minute, 'delallcar')
+    end
+end)
 
 -----------------------------------------------------
 --- Register Commands ยกเลิกการนับเวลาถอยหลังลบรถอัตโนมัติ ---
 -----------------------------------------------------
-ESX.RegisterCommand(Config.CanCelDelete.Commands, Config.DeleteAllVehicle.Group, function(xPlayer, args, showError)
-    timer = 0
-    isEventStart = false
-    TriggerClientEvent(script_name .. ":CancelDeleteCar", -1)
-end, true, {
-    help = Config.DeleteAllVehicle.HelpMessage,
-    validate = Config.DeleteAllVehicle.allowConsole
-})
+RegisterCommand(Config.CanCelDeleteAllVehicle.command, function(source, args, user)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    if Config.DeleteAllVehicle.group[xPlayer.getGroup()] then
+        timer = 0
+        isEventStart = false
+        TriggerClientEvent(script_name .. ":CancelDeleteCar", -1)
+    end
+end)
 
 RegisterServerEvent(script_name .. ':CheckEventTime')
 AddEventHandler(script_name .. ':CheckEventTime', function()
