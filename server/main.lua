@@ -54,13 +54,13 @@ end
 
 function checkTimeRunAuto()
     SetTimeout(1000, function()
-        local date_local = os.date('%H:%M:%S', os.time())
-        for i = 1, #Config.Timer, 1 do
-            local start_time = Config.Timer[i][1] .. ':00'
-            if date_local == start_time then
-                if Config.Timer[i][2] == "delallcar" then
-                    TriggerClientEvent(script_name .. ':deleteCar', -1, Config.Timer[i][3])
-                    checkTimeLoad(Config.Timer[i][3])
+        local date_local = os.date('%H:%M', os.time())
+        if not isEventStart then
+            for i = 1, #Config.Timer, 1 do
+                local start_time = Config.Timer[i][1]
+                if date_local == start_time then
+                    TriggerClientEvent(script_name .. ':deleteCar', -1, Config.Timer[i][2])
+                    checkTimeLoad(Config.Timer[i][2])
                 end
             end
         end
