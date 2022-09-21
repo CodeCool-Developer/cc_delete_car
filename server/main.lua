@@ -12,9 +12,11 @@ end)
 RegisterCommand(Config.DeleteAllVehicle.command, function(source, args, user)
     local xPlayer = ESX.GetPlayerFromId(source)
     if Config.DeleteAllVehicle.group[xPlayer.getGroup()] then
-        local minute = args[1]
-        TriggerClientEvent(script_name .. ":deleteCar", -1, minute)
-        checkTimeLoad(minute, 'delallcar')
+        if args[1] ~= nil then
+            local minute = args[1]
+            TriggerClientEvent(script_name .. ":deleteCar", -1, minute)
+            checkTimeLoad(minute, 'delallcar')
+        end
     end
 end)
 
