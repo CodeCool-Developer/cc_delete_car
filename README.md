@@ -3,9 +3,8 @@ Script ลบรถอัตโนมัติ สามารถยกเลิ
 
 <img src="https://cdn.discordapp.com/attachments/999480649717125170/1020465398459670628/Screenshot_2022-09-16_235314.png"/>
 <img src="https://cdn.discordapp.com/attachments/999480649717125170/1021949104986796163/unknown.png"/>
-### Discord : [CodeCool Developer](https://discord.gg/K7PDe2jfpW)
 
-### Reference UI: [Dv_Hunter_delcars]()
+### Discord : [discord.gg/K7PDe2jfpW](https://discord.gg/K7PDe2jfpW)
 
 ## ดาวน์โหลด
 ### ใช้ Git
