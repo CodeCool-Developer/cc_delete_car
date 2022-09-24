@@ -17,10 +17,10 @@ Config.EventRoute = {
 }
 
 Config.SoundNotify = {
-    { time = 10, file = 'delcars1', volume = 0.2 },
-    { time = 3, file = 'delcars2', volume = 0.2 },
-    { time = 1, file = 'delcars3', volume = 0.2 },
-    { time = 0, file = 'delcars4', volume = 0.2 }
+    { time = 10, file = 'delcar1', volume = 0.2 },
+    { time = 3, file = 'delcar2', volume = 0.2 },
+    { time = 1, file = 'delcar3', volume = 0.2 },
+    { time = 0, file = 'delcar4', volume = 0.2 }
 }
 
 Config.Timer = {
