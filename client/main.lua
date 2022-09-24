@@ -1,6 +1,8 @@
 ESX = nil
 
 local isCountDownDeleteCar = false
+local lastTimePlaySound = nil
+local endSound = nil
 
 Citizen.CreateThread(function()
     while ESX == nil do
@@ -21,10 +23,31 @@ AddEventHandler(script_name .. ':CancelDeleteCar', function()
     isCountDownDeleteCar = false
     SendNUIMessage({ ShowMenu = false, })
     PlaySoundFrontend(-1, "NAV", "HUD_AMMO_SHOP_SOUNDSET", 1)
+
+    SendNUIMessage({
+        transactionType = 'stopSound',
+    })
 end)
+
+function playSound(soundNotify)
+    SendNUIMessage({
+        transactionType = 'playSound',
+        transactionFile = soundNotify.file,
+        transactionVolume = soundNotify.volume
+    })
+end
 
 RegisterNetEvent(script_name .. ':deleteCar')
 AddEventHandler(script_name .. ':deleteCar', function(_times)
+    -- ค้นหาเสียงสุดท้ายตอนนับเวลาจบว่ามีหรือไม่
+    for k, v in pairs(Config.SoundNotify) do
+        if v.time == 0 then
+            print('end sound')
+            endSound = v
+            break
+        end
+    end
+
     isCountDownDeleteCar = true
 
     PlaySoundFrontend(-1, "NAV", "HUD_AMMO_SHOP_SOUNDSET", 1)
@@ -41,6 +64,18 @@ AddEventHandler(script_name .. ':deleteCar', function(_times)
             local txtMin = ('%s'):format(minToClock(matchTime))
             local txtSec = ('%s'):format(secToClock(matchTime))
 
+            local min = tonumber(txtMin) + 1
+            if lastTimePlaySound ~= tonumber(min) then
+                lastTimePlaySound = min
+                print('start check')
+                for k, v in pairs(Config.SoundNotify) do
+                    if min == v.time then
+                        playSound(v)
+                        print('111111')
+                    end
+                end
+            end
+
             if isCountDownDeleteCar then
                 SendNUIMessage({
                     display = true,
@@ -52,6 +87,7 @@ AddEventHandler(script_name .. ':deleteCar', function(_times)
                 })
 
                 if matchTime == 0 then
+                    playSound(endSound)
                     local gameVehicles = ESX.Game.GetVehicles()
                     for i = 1, #gameVehicles do
                         local vehicle = gameVehicles[i]
@@ -67,6 +103,7 @@ AddEventHandler(script_name .. ':deleteCar', function(_times)
                         end
                     end
                     isCountDownDeleteCar = false
+                    lastTimePlaySound = nil
                     SendNUIMessage({ display = false, })
                 end
             end

@@ -12,6 +12,8 @@ files {
     "client/html/index.html",
     "client/html/js/*.js",
     "client/html/css/*.css",
+    'client/html/images/*.png',
+    'client/html/sounds/*.mp3',
 }
 
 shared_script {
