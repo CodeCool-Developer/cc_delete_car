@@ -67,11 +67,9 @@ AddEventHandler(script_name .. ':deleteCar', function(_times)
             local min = tonumber(txtMin) + 1
             if lastTimePlaySound ~= tonumber(min) then
                 lastTimePlaySound = min
-                print('start check')
                 for k, v in pairs(Config.SoundNotify) do
                     if min == v.time then
                         playSound(v)
-                        print('111111')
                     end
                 end
             end
@@ -87,7 +85,9 @@ AddEventHandler(script_name .. ':deleteCar', function(_times)
                 })
 
                 if matchTime == 0 then
-                    playSound(endSound)
+                    if endSound ~= nil then
+                        playSound(endSound)
+                    end
                     local gameVehicles = ESX.Game.GetVehicles()
                     for i = 1, #gameVehicles do
                         local vehicle = gameVehicles[i]
