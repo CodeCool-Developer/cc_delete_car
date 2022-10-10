@@ -42,7 +42,6 @@ AddEventHandler(script_name .. ':deleteCar', function(_times)
     -- ค้นหาเสียงสุดท้ายตอนนับเวลาจบว่ามีหรือไม่
     for k, v in pairs(Config.SoundNotify) do
         if v.time == 0 then
-            print('end sound')
             endSound = v
             break
         end

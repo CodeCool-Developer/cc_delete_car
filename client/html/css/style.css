@@ -10,9 +10,9 @@
     top: 9.5%;
     transform: translateY(-50%);
     background-color: rgba(18, 20, 23, 0.6);
-    box-shadow: 0 0 10px rgb(39,149,255);
-    border-left: 0.4vh solid #73C2FB;
-    border-right: 0.4vh solid #73C2FB;
+    box-shadow: 0 0 10px rgb(0,214,139);
+    border-left: 0.4vh solid #00D68B;
+    border-right: 0.4vh solid #00D68B;
     height: 12vh;
     border-radius: 1vh;
     width: 37vh;
@@ -38,7 +38,7 @@
     top: 1vh;
     left: 1vh;
     line-height: 2vh;
-    color: #73C2FB;
+    color: #00D68B;
     font-size: 2vh;
     text-align: left;
 }
@@ -102,7 +102,7 @@
     height: 4vh;
     top: 0.5vh;
     left: 0.5vh;
-    background-image: url(https://cdn.discordapp.com/attachments/1010911970066698280/1010912674839797800/Logo_128.png);
+    background-image: url(https://cdn.discordapp.com/attachments/1020489161083465768/1020489429212737547/CCDEV.png);
     background-size: cover;
     animation: 3s ease 0s infinite normal none running LogoRotate;
 }
