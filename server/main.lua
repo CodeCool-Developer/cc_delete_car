@@ -100,15 +100,15 @@ function checkTimeRunAuto()
     SetTimeout(1000, function()
         local date_local = os.date('%H:%M', os.time())
         if not isEventStart then
-            for i = 1, #Config.TimerDeleteVehicle, 1 do
-                local start_time = Config.TimerDeleteVehicle[i][1]
+            for i = 1, #Config.Timer, 1 do
+                local start_time = Config.Timer[i][1]
                 if date_local == start_time then
-                    if Config.TimerDeleteVehicle[i][3] == 'delcar' then
-                        TriggerClientEvent(script_name .. ':RunNotifyDeleteVehicle', -1, Config.TimerDeleteVehicle[i][2])
-                        checkTimeLoad(Config.TimerDeleteVehicle[i][2])
-                    elseif Config.TimerDeleteVehicle[i][3] == 'restart' then
-                        TriggerClientEvent(script_name .. ':RunNotifyRestartServer', -1, Config.TimerDeleteVehicle[i][2])
-                        checkTimeLoad(Config.TimerDeleteVehicle[i][2])
+                    if Config.Timer[i][3] == 'delcar' then
+                        TriggerClientEvent(script_name .. ':RunNotifyDeleteVehicle', -1, Config.Timer[i][2])
+                        checkTimeLoad(Config.Timer[i][2])
+                    elseif Config.Timer[i][3] == 'restart' then
+                        TriggerClientEvent(script_name .. ':RunNotifyRestartServer', -1, Config.Timer[i][2])
+                        checkTimeLoad(Config.Timer[i][2])
                     end
                 end
             end

@@ -154,8 +154,8 @@ AddEventHandler(script_name .. ':RunNotifyRestartServer', function(_times)
                 SendNUIMessage({
                     display = true,
                     IsPauseMenuActive = IsPauseMenuActive(),
-                    titleText = 'ระบบรีสตาร์ทเซิฟเวอร์',
-                    subText = 'กรุณาออกจากเซิฟเวอร์ในเวลาที่กำหนด',
+                    titleText = 'ระบบรีสตาร์ทเซิร์ฟเวอร์',
+                    subText = 'กรุณาออกจากเซิร์ฟเวอร์ในเวลาที่กำหนด',
                     txtMin = txtMin,
                     txtSec = txtSec,
                 })

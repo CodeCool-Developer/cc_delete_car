@@ -30,7 +30,7 @@ Config.SoundNotifyRestartServer = {
     --{ time = 0, file = 'restart4', volume = 0.2 }
 }
 
-Config.TimerDeleteVehicle = {
+Config.Timer = {
     { '04:00', 10, 'delcar' },
     { '09:00', 10, 'delcar' },
     { '14:00', 10, 'delcar' },
