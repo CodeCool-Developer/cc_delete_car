@@ -16,25 +16,28 @@ Config.EventRoute = {
     ['getSharedObject'] = 'esx:getSharedObject', -- Default: 'esx:getSharedObject'
 }
 
-Config.SoundNotify = {
+Config.SoundNotifyDeleteVehicle = {
     { time = 10, file = 'delcar10', volume = 0.2 },
     { time = 3, file = 'delcar3', volume = 0.2 },
     { time = 1, file = 'delcar1', volume = 0.2 },
     { time = 0, file = 'delcar0', volume = 0.2 }
 }
 
-Config.Timer = {
-    { "02:50", 10 },
-    { "04:50", 10 },
-    { "06:50", 10 },
-    { "08:50", 10 },
-    { "10:50", 10 },
-    { "12:50", 10 },
-    { "14:50", 10 },
-    { "16:50", 10 },
-    { "18:50", 10 },
-    { "20:50", 10 },
-    { "22:50", 10 },
+Config.SoundNotifyRestartServer = {
+    --{ time = 10, file = 'restart1', volume = 0.2 },
+    --{ time = 3, file = 'restart2', volume = 0.2 },
+    --{ time = 1, file = 'restart3', volume = 0.2 },
+    --{ time = 0, file = 'restart4', volume = 0.2 }
+}
+
+Config.TimerDeleteVehicle = {
+    { '04:00', 10, 'delcar' },
+    { '09:00', 10, 'delcar' },
+    { '14:00', 10, 'delcar' },
+    { '20:00', 10, 'delcar' },
+    { '23:00', 10, 'delcar' },
+
+    { '14:41', 1, 'restart' },
 }
 
 Config.DeleteAllVehicle = {
@@ -47,6 +50,22 @@ Config.DeleteAllVehicle = {
 
 Config.CanCelDeleteAllVehicle = {
     command = 'ccdelallcar',
+    group = {
+        ['superadmin'] = true,
+        ['admin'] = true,
+    },
+}
+
+Config.RunRestartNotify = {
+    command = 'rsnoti',
+    group = {
+        ['superadmin'] = true,
+        ['admin'] = true,
+    },
+}
+
+Config.CanCelRestartNotify = {
+    command = 'ccrsnoti',
     group = {
         ['superadmin'] = true,
         ['admin'] = true,

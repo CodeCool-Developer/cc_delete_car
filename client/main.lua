@@ -1,6 +1,7 @@
 ESX = nil
 
 local isCountDownDeleteCar = false
+local isCountDownRestartServer = false
 local lastTimePlaySound = nil
 local endSound = nil
 
@@ -18,9 +19,20 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
     TriggerServerEvent(script_name .. ':CheckEventTime')
 end)
 
-RegisterNetEvent(script_name .. ':CancelDeleteCar')
-AddEventHandler(script_name .. ':CancelDeleteCar', function()
+RegisterNetEvent(script_name .. ':CancelNotifyDeleteVehicle')
+AddEventHandler(script_name .. ':CancelNotifyDeleteVehicle', function()
     isCountDownDeleteCar = false
+    SendNUIMessage({ ShowMenu = false, })
+    PlaySoundFrontend(-1, "NAV", "HUD_AMMO_SHOP_SOUNDSET", 1)
+
+    SendNUIMessage({
+        transactionType = 'stopSound',
+    })
+end)
+
+RegisterNetEvent(script_name .. ':CancelNotifyRestartServer')
+AddEventHandler(script_name .. ':CancelNotifyRestartServer', function()
+    isCountDownRestartServer = false
     SendNUIMessage({ ShowMenu = false, })
     PlaySoundFrontend(-1, "NAV", "HUD_AMMO_SHOP_SOUNDSET", 1)
 
@@ -37,16 +49,8 @@ function playSound(soundNotify)
     })
 end
 
-RegisterNetEvent(script_name .. ':deleteCar')
-AddEventHandler(script_name .. ':deleteCar', function(_times)
-    -- ค้นหาเสียงสุดท้ายตอนนับเวลาจบว่ามีหรือไม่
-    for k, v in pairs(Config.SoundNotify) do
-        if v.time == 0 then
-            endSound = v
-            break
-        end
-    end
-
+RegisterNetEvent(script_name .. ':RunNotifyDeleteVehicle')
+AddEventHandler(script_name .. ':RunNotifyDeleteVehicle', function(_times)
     isCountDownDeleteCar = true
 
     PlaySoundFrontend(-1, "NAV", "HUD_AMMO_SHOP_SOUNDSET", 1)
@@ -66,7 +70,7 @@ AddEventHandler(script_name .. ':deleteCar', function(_times)
             local min = tonumber(txtMin) + 1
             if lastTimePlaySound ~= tonumber(min) then
                 lastTimePlaySound = min
-                for k, v in pairs(Config.SoundNotify) do
+                for k, v in pairs(Config.SoundNotifyDeleteVehicle) do
                     if min == v.time then
                         playSound(v)
                     end
@@ -84,6 +88,14 @@ AddEventHandler(script_name .. ':deleteCar', function(_times)
                 })
 
                 if matchTime == 0 then
+                    -- ค้นหาเสียงสุดท้ายตอนนับเวลาจบว่ามีหรือไม่
+                    for k, v in pairs(Config.SoundNotifyDeleteVehicle) do
+                        if v.time == 0 then
+                            endSound = v
+                            break
+                        end
+                    end
+
                     if endSound ~= nil then
                         playSound(endSound)
                     end
@@ -102,6 +114,79 @@ AddEventHandler(script_name .. ':deleteCar', function(_times)
                         end
                     end
                     isCountDownDeleteCar = false
+                    lastTimePlaySound = nil
+                    SendNUIMessage({ display = false, })
+                end
+            end
+        end
+    end)
+end)
+
+RegisterNetEvent(script_name .. ':RunNotifyRestartServer')
+AddEventHandler(script_name .. ':RunNotifyRestartServer', function(_times)
+    isCountDownRestartServer = true
+
+    PlaySoundFrontend(-1, "NAV", "HUD_AMMO_SHOP_SOUNDSET", 1)
+
+    local times = _times * 60
+    local matchTime = ESX.Round(times)
+    Citizen.CreateThread(function()
+        while matchTime > 0 and isCountDownRestartServer do
+            Citizen.Wait(1000)
+            if matchTime > 0 then
+                matchTime = matchTime - 1
+            end
+
+            local txtMin = ('%s'):format(minToClock(matchTime))
+            local txtSec = ('%s'):format(secToClock(matchTime))
+
+            local min = tonumber(txtMin) + 1
+            if lastTimePlaySound ~= tonumber(min) then
+                lastTimePlaySound = min
+                for k, v in pairs(Config.SoundNotifyRestartServer) do
+                    if min == v.time then
+                        playSound(v)
+                    end
+                end
+            end
+
+            if isCountDownRestartServer then
+                SendNUIMessage({
+                    display = true,
+                    IsPauseMenuActive = IsPauseMenuActive(),
+                    titleText = 'ระบบรีสตาร์ทเซิฟเวอร์',
+                    subText = 'กรุณาออกจากเซิฟเวอร์ในเวลาที่กำหนด',
+                    txtMin = txtMin,
+                    txtSec = txtSec,
+                })
+
+                if matchTime == 0 then
+                    -- ค้นหาเสียงสุดท้ายตอนนับเวลาจบว่ามีหรือไม่
+                    for k, v in pairs(Config.SoundNotifyRestartServer) do
+                        if v.time == 0 then
+                            endSound = v
+                            break
+                        end
+                    end
+
+                    if endSound ~= nil then
+                        playSound(endSound)
+                    end
+                    local gameVehicles = ESX.Game.GetVehicles()
+                    for i = 1, #gameVehicles do
+                        local vehicle = gameVehicles[i]
+                        if (not IsPedAPlayer(GetPedInVehicleSeat(vehicle, -1))) then
+                            SetVehicleHasBeenOwnedByPlayer(vehicle, false)
+                            SetEntityAsMissionEntity(vehicle, false, false)
+                            Citizen.CreateThread(function()
+                                while DoesEntityExist(vehicle) do
+                                    Citizen.Wait(1000)
+                                    ESX.Game.DeleteVehicle(vehicle)
+                                end
+                            end)
+                        end
+                    end
+                    isCountDownRestartServer = false
                     lastTimePlaySound = nil
                     SendNUIMessage({ display = false, })
                 end
