@@ -80,13 +80,10 @@ function checkTimeLoad(xTime, xEventName)
             Citizen.Wait(1000)
             if timer == 0 then
                 if EventName == 'restart' then
-                    ESX.SavePlayers(function()
-                        print(script_name .. ':Save All Player')
-                        local xPlayers = ESX.GetPlayers()
-                        for k, user in pairs(xPlayers) do
-                            DropPlayer(user, 'รีเซิฟนะอิอิ') -- TODO เปลี่ยนคำ
-                        end
-                    end)
+                    local xPlayers = ESX.GetPlayers()
+                    for k, user in pairs(xPlayers) do
+                        DropPlayer(user, 'รีเซิร์ฟนะอิอิ') -- TODO เปลี่ยนคำ
+                    end
                 end
                 isEventStart = false
                 EventName = nil
@@ -105,10 +102,10 @@ function checkTimeRunAuto()
                 if date_local == start_time then
                     if Config.Timer[i][3] == 'delcar' then
                         TriggerClientEvent(script_name .. ':RunNotifyDeleteVehicle', -1, Config.Timer[i][2])
-                        checkTimeLoad(Config.Timer[i][2])
+                        checkTimeLoad(Config.Timer[i][2], Config.Timer[i][3])
                     elseif Config.Timer[i][3] == 'restart' then
                         TriggerClientEvent(script_name .. ':RunNotifyRestartServer', -1, Config.Timer[i][2])
-                        checkTimeLoad(Config.Timer[i][2])
+                        checkTimeLoad(Config.Timer[i][2], Config.Timer[i][3])
                     end
                 end
             end
